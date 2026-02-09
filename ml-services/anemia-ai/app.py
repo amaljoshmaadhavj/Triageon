@@ -35,8 +35,9 @@ app = Flask(__name__)
 CORS(app)
 
 # -------------------- DATABASE --------------------
-client = MongoClient("mongodb+srv://vishalsuresh_db:vishal1234@anemiaicluster.kgtsjjn.mongodb.net/?retryWrites=true&w=majority")
-db = client["vishalsuresh_db"]
+mongodb_uri = os.getenv("MONGODB_URI", "mongodb+srv://localhost:27017/")
+client = MongoClient(mongodb_uri)
+db = client[os.getenv("MONGODB_DB_NAME", "anemia_db")]
 users_collection = db["users"]
 records_collection = db["health_records"]
 
